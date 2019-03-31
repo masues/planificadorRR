@@ -7,8 +7,8 @@ package planificadorrr;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- *
- * @author ASUS
+ * @author Humberto Serafin Castillo Lopez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class ProcesosListos {
     //Colecciones de procesos

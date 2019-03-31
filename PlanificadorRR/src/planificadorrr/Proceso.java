@@ -6,8 +6,8 @@
 package planificadorrr;
 
 /**
- *
- * @author ASUS
+ * @author Humberto Serafin Castillo Lopez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class Proceso {
     public String idProceso;

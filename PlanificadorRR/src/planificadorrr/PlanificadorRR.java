@@ -8,8 +8,8 @@ package planificadorrr;
 import java.util.Scanner;
 
 /**
- *
- * @author ASUS
+ * @author Humberto Serafin Castillo Lopez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class PlanificadorRR {
 

@@ -8,8 +8,8 @@ package planificadorrr;
 import java.util.ArrayList;
 
 /**
- *
- * @author ASUS
+ * @author Humberto Serafin Castillo Lopez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class ProcesosEjecucion {
     ArrayList<Proceso> colaListoEjec = new ArrayList<>();
