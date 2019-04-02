@@ -40,17 +40,4 @@ public class ProcesosEjecucion {
         colaListoEjec.remove(0);
         this.imprimeProcesosListosEjec();
     }
-    
-    public void terminarProceso(Proceso n){
-        Boolean existe = false;
-        for(int a = 0; a < procesosTerminados.size(); a++){
-            if(n.idProceso.equals(procesosTerminados.get(a).idProceso)){
-                existe = true;
-                break;
-            }
-        }
-        if(existe == false){
-            procesosTerminados.add(n);
-        }
-    }
 }
