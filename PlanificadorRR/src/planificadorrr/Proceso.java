@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package planificadorrr;
 
 /**
- * @author Humberto Serafin Castillo Lopez
+ * @author Humberto Serafín Castillo López
  * @author Mario Alberto Suárez Espinoza
+ * @author Luis Ignacio Hernández Sánchez
  */
 public class Proceso {
     public String idProceso;
@@ -45,6 +41,5 @@ public class Proceso {
         this.tiempoEspRel = tUltimaSubCPU - tiempoPrevioCPU - tiempoLlegada;
         this.tiempoRespRel = tPrimerSubCPU - tiempoLlegada;
         this.tiempoEjecRel = tiempoFinal - tiempoLlegada;
-        //System.out.println(tiempoEjecRel);
     }
 }

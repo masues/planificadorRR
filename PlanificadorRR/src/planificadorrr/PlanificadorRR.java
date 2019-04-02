@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package planificadorrr;
 
 import java.util.Scanner;
 
 /**
- * @author Humberto Serafin Castillo Lopez
+ * @author Humberto Serafín Castillo López
  * @author Mario Alberto Suárez Espinoza
+ * @author Luis Ignacio Hernández Sánchez
  */
 public class PlanificadorRR {
 
@@ -66,32 +62,13 @@ public class PlanificadorRR {
             //Valida si hay procesos listos para agregar a procesos en ejecucion
             if(!(agendador.colaProcListos.isEmpty())){//trata de subir procesos de la cola de listos a la cola de proc listos para ejecución
                 int tamano =agendador.colaProcListos.size();
-                for(int i=0;i<tamano;i++){
+                for(int i=0;i<tamano;i++){//ciclo intenta subir todos los procesos de la cola de procesos listos a la de ejecucion, hasta que se llene la memoria
                     //Validacion de memoria disponible
                     if(agendador.colaProcListos.get(0).tamProceso <= despachador.memoria){
                         despachador.activacion(agendador.colaProcListos.get(0));
                         agendador.sacarProceso();
-                        /*//Validacion de disponibilidad del CPU
-                        if(cpu.disponible == true){
-                            cpu.recibirProceso(despachador.colaListoEjec.get(0));   //Envio del proceso al CPU
-                            despachador.ejecutarProceso();
-                            //Actualizacion de memoria
-                            despachador.memoria = despachador.memoria + cpu.procesoEjecutando.tamProceso;
-                            //Actualizacion datos del proceso
-                            if(cpu.procesoEjecutando.primeraVez == false){
-                                cpu.procesoEjecutando.primeraVez = true;
-                                cpu.procesoEjecutando.tPrimerSubCPU = tiempo;
-                            }
-                            //Validacion de la ultima subida a CPU
-                            if(cpu.procesoEjecutando.tiempoEjec <= cpu.quantum){
-                                cpu.procesoEjecutando.tUltimaSubCPU = tiempo;
-                                cpu.procesoEjecutando.tiempoPrevioCPU = cpu.procesoEjecutando.tiempoRafaga - cpu.procesoEjecutando.tiempoEjec;
-                            }
-                        }//en caso contrario, hay un proceso en la CPU, entonces continuar*/
-                    }
-                    else{//no hay memoria suficiente
-                            //if(cpu.quantum==cpu.quantumInicial)
-                                System.out.println("\nMemoria insuficiente para subir a "+agendador.colaProcListos.get(0).idProceso+"\n");
+                    }else{//no hay memoria suficiente
+                        System.out.println("\nMemoria insuficiente para subir a "+agendador.colaProcListos.get(0).idProceso+"\n");
                     }
                 }
             }
@@ -118,20 +95,12 @@ public class PlanificadorRR {
                 if(cpu.quantum > 0){
                     if(cpu.procesoEjecutando.tiempoEjec > 0){
                         cpu.ejecucion();
-                    }
-                    //Comprueba si el proceso termina despues del ultimo decremento
-                    //if(cpu.procesoEjecutando.tiempoEjec == 0){
-                    else{//termino su tiempo de ejecucion antes de acabar el quantum
+                    }else{//termino su tiempo de ejecucion antes de acabar el quantum
                         cpu.liberar();
                         cpu.procesoEjecutando.tiempoFinal = tiempo;
                         tiempo--;
                         //Registrar en procesos terminados
                         despachador.procesosTerminados.add(cpu.procesoEjecutando);
-                        //despachador.terminarProceso(cpu.procesoEjecutando);
-                        //System.out.println("cpu.quantum < 0");
-                        //despachador.procesosTerminados.get(0).tiempoFinal = tiempo;
-                        //Actualizacion de memoria
-                        //despachador.memoria = despachador.memoria + despachador.procesosTerminados.get(despachador.procesosTerminados.size()-1).tamProceso;
                     }
                 }else{//termino su quantum
                     if(cpu.procesoEjecutando.tiempoEjec == 0){//también terminó de ejecutarse

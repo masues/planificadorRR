@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package planificadorrr;
 
 /**
- * @author Humberto Serafin Castillo Lopez
+ * @author Humberto Serafín Castillo López
  * @author Mario Alberto Suárez Espinoza
+ * @author Luis Ignacio Hernández Sánchez
  */
 public class CPU {
     int quantumInicial;
@@ -32,7 +28,6 @@ public class CPU {
     }
     
     public void liberar(){
-        //this.procesoEjecutando = null;
         this.disponible = true;
         this.quantum = quantumInicial;
     }

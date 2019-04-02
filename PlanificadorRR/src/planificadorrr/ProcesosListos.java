@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package planificadorrr;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * @author Humberto Serafin Castillo Lopez
+ * @author Humberto Serafín Castillo López
  * @author Mario Alberto Suárez Espinoza
+ * @author Luis Ignacio Hernández Sánchez
  */
 public class ProcesosListos {
     //Colecciones de procesos
@@ -58,8 +54,6 @@ public class ProcesosListos {
             colaProcesosIniciales.add(process);
         }
     }
-    
-
     
     public void imprimeProcesosListos(){    //Impresion de la cola de Procesos Listos
         String salida = "";
