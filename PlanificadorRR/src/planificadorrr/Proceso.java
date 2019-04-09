@@ -2,8 +2,8 @@ package planificadorrr;
 
 /**
  * @author Humberto Serafín Castillo López
- * @author Mario Alberto Suárez Espinoza
  * @author Luis Ignacio Hernández Sánchez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class Proceso {
     public String idProceso;

@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 /**
  * @author Humberto Serafín Castillo López
- * @author Mario Alberto Suárez Espinoza
  * @author Luis Ignacio Hernández Sánchez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class ProcesosListos {
     //Colecciones de procesos
@@ -21,7 +21,7 @@ public class ProcesosListos {
     int tLlegada;
     
     //Creacion de un nuevo proceso
-    public void nuevoProceso(){
+    public void nuevoProceso(int memoria){
         //Lectura de datos del proceso
         Scanner teclado = new Scanner(System.in);
         System.out.println("ID del proceso: ");
@@ -38,21 +38,24 @@ public class ProcesosListos {
         tES = teclado.nextInt();
         System.out.println("Tiempo de llegada del proceso[ms]: ");
         tLlegada = teclado.nextInt();
-        
-        if(colaProcesosIniciales.isEmpty()){    //Valida si la cola de procesos iniciales está vacía
-            Proceso process = new Proceso(id, nombre, tamaño, tEjec, prioridad, tES, tLlegada);
-            colaProcesosIniciales.add(process);
+        if(tamaño>memoria){
+            System.out.println("El tamaño del proceso excede al de la memoria. Intenta con otro.");
         }else{
-            for(c = 0; c < colaProcesosIniciales.size(); c++){
-                //Busca ID repetidos en los procesos creados
-                if(id.equals(colaProcesosIniciales.get(c).idProceso)){
-                    System.out.println("El proceso ya existe");
-                    break;
+            if(colaProcesosIniciales.isEmpty()){    //Valida si la cola de procesos iniciales está vacía
+                Proceso process = new Proceso(id, nombre, tamaño, tEjec, prioridad, tES, tLlegada);
+                colaProcesosIniciales.add(process);
+            }else{
+                for(c = 0; c < colaProcesosIniciales.size(); c++){
+                    //Busca ID repetidos en los procesos creados
+                    if(id.equals(colaProcesosIniciales.get(c).idProceso)){
+                        System.out.println("El proceso ya existe");
+                        break;
+                    }
                 }
+                Proceso process = new Proceso(id, nombre, tamaño, tEjec, prioridad, tES, tLlegada);
+                colaProcesosIniciales.add(process);
             }
-            Proceso process = new Proceso(id, nombre, tamaño, tEjec, prioridad, tES, tLlegada);
-            colaProcesosIniciales.add(process);
-        }
+        }   
     }
     
     public void imprimeProcesosListos(){    //Impresion de la cola de Procesos Listos

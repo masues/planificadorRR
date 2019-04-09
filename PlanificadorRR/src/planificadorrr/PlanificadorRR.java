@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 /**
  * @author Humberto Serafín Castillo López
- * @author Mario Alberto Suárez Espinoza
  * @author Luis Ignacio Hernández Sánchez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class PlanificadorRR {
 
@@ -19,21 +19,21 @@ public class PlanificadorRR {
         float tiempoRespuestaPromedio = 0;
         float tiempoEjecucionPromedio = 0;
         char resp = 'y';
+        int memoria;
         
         //Creacion de instancias de ProcesosListos, ProcesosEjecucion, CPU
         ProcesosListos agendador = new ProcesosListos();
         Scanner teclado = new Scanner(System.in);
         System.out.println("Memoria: ");
-        int m = teclado.nextInt();
-        ProcesosEjecucion despachador = new ProcesosEjecucion(m);
+        memoria = teclado.nextInt();
+        ProcesosEjecucion despachador = new ProcesosEjecucion(memoria);
         
         System.out.println("Quantum: ");
         int q = teclado.nextInt();
         CPU cpu = new CPU(q);
-        
         do{ //Ciclo para obtener datos de procesos que se crearán
             System.out.println("\nIngresa datos del proceso");
-            agendador.nuevoProceso();
+            agendador.nuevoProceso(memoria);
             System.out.println("\nDeseas agregar otro proceso [y/n]");
             Scanner tec = new Scanner(System.in);
             resp = tec.next().charAt(0);
@@ -109,18 +109,12 @@ public class PlanificadorRR {
                         tiempo--;
                         //Registrar en procesos terminados
                         despachador.procesosTerminados.add(cpu.procesoEjecutando);
-                        //despachador.terminarProceso(cpu.procesoEjecutando);
-                        //System.out.println("tiempo ejec == 0");
-                        //despachador.procesosTerminados.get(0).tiempoFinal = tiempo;
-                        //Actualizacion de memoria
-                        //despachador.memoria = despachador.memoria + despachador.procesosTerminados.get(despachador.procesosTerminados.size()-1).tamProceso;
                     }else{//terminó su quantum, pero no de ejecutarse.
                         //previo
                         tiempo--;
                         cpu.liberar();
                         //Envia proceso del CPU a la cola de Procesos Listos
                         agendador.agendar(cpu.procesoEjecutando);
-                        //despachador.memoria = despachador.memoria + cpu.procesoEjecutando.tamProceso;
                     }
                 }
             }
@@ -129,27 +123,25 @@ public class PlanificadorRR {
             if(agendador.colaProcesosIniciales.size() == despachador.procesosTerminados.size()){
                 bandera = false;
             }
-            //System.out.println("Iniciales: "+agendador.colaProcesosIniciales.size()+"Terminados: "+despachador.procesosTerminados.size());
         }
         for(int c = 0; c < despachador.procesosTerminados.size(); c++){
-            //System.out.println(despachador.procesosTerminados.get(c).idProceso);
             despachador.procesosTerminados.get(c).tiemposCriticos();
-            //System.out.println(despachador.procesosTerminados.get(c).tiempoEspRel);
-            //System.out.println(despachador.procesosTerminados.get(c).tiempoRespRel);
-            //System.out.println(despachador.procesosTerminados.get(c).tiempoEjecRel);
             tiempoEsperaPromedio = tiempoEsperaPromedio + despachador.procesosTerminados.get(c).tiempoEspRel;
             tiempoRespuestaPromedio = tiempoRespuestaPromedio + despachador.procesosTerminados.get(c).tiempoRespRel;
             tiempoEjecucionPromedio = tiempoEjecucionPromedio + despachador.procesosTerminados.get(c).tiempoEjecRel;
         }
         int n = despachador.procesosTerminados.size();
-        float tEspProm = tiempoEsperaPromedio / n;
-        float tRespProm = tiempoRespuestaPromedio / n;
-        float tEjecProm = tiempoEjecucionPromedio / n;
+        if (n==0){
+            System.out.println("No se insertó ningun proceso.");
+        }else{
+            float tEspProm = tiempoEsperaPromedio / n;
+            float tRespProm = tiempoRespuestaPromedio / n;
+            float tEjecProm = tiempoEjecucionPromedio / n;
         
-        System.out.println("\n----- Tiempos Finales -----\n");
-        System.out.println("Tiempo de Espera promedio: "+String.format("%.2f", tEspProm));
-        System.out.println("Tiempo de Respuesta promedio: "+String.format("%.2f", tRespProm));
-        System.out.println("Tiempo de Ejecucion promedio: "+String.format("%.2f", tEjecProm));
+            System.out.println("\n----- Tiempos Finales -----\n");
+            System.out.println("Tiempo de Espera promedio: "+String.format("%.2f", tEspProm));
+            System.out.println("Tiempo de Respuesta promedio: "+String.format("%.2f", tRespProm));
+            System.out.println("Tiempo de Ejecucion promedio: "+String.format("%.2f", tEjecProm));
+        }
     }
-    
 }

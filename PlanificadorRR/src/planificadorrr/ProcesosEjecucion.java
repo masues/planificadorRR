@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 /**
  * @author Humberto Serafín Castillo López
- * @author Mario Alberto Suárez Espinoza
  * @author Luis Ignacio Hernández Sánchez
+ * @author Mario Alberto Suárez Espinoza
  */
 public class ProcesosEjecucion {
     ArrayList<Proceso> colaListoEjec = new ArrayList<>();
